@@ -2,11 +2,27 @@
 //
 
 #include "pch.h"
+#include "table.h"
+
 #include <iostream>
 
-int main()
-{
-    std::cout << "Hello World!\n"; 
+using namespace std;
+
+int main() {
+	Table tab, tab2;
+	tab + tab2;
+	//tab.showTable();
+
+	//Table tab2(tab);
+
+	//tab2.showTable();
+
+	//Table tab3(move(tab));
+	//Table tab3;
+	//tab3 = move(tab);
+
+	//tab3.showTable();
+	//tab.showTable();
 }
 
 // Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania

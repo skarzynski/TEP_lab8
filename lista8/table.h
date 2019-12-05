@@ -24,6 +24,7 @@ public:
 	Table();				//konstruktor bezparametrowy z domyślnymi wartościami
 	Table(string name, int tableLength, string password);  //konstruktor z parametrami
 	Table(const Table &otherTable);			//konstruktor kopiujący
+	Table(Table &&otherTable);				//konstruktor przenoszący
 
 	~Table();				//destruktor
 
@@ -39,7 +40,9 @@ public:
 	void setSize(int newSize);			//zmienia parametr tableLength
 	void setValueAt(int position, int newValue); //ustawia nową wartość na zadanej pozycji
 
-	Table operator + (Table &newValue);	//operator + zwracający konkatenację dwóch tablic
+	Table& operator = (Table &&otherTable); //przenoszący operator =
+	Table operator + (const Table &otherTable);	//operator + zwracający konkatenację dwóch tablic
+	Table operator + (const Table &&otherTable); //przenoszący operator + zwracający konkatenację dwóch tablic
 	Table operator << (int position);	//operator << przesuwający tablicę o zadaną liczbę pozycji w lewo
 	Table operator >> (int position);	//operator >> przesuwający tablicę o zadaną liczbę pozycji w prawo
 

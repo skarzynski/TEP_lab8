@@ -58,6 +58,18 @@ Table::Table(const Table &otherTable) {
 	cout << "kopiuj: " << this->name << endl;
 }
 
+Table::Table(Table && otherTable) {
+	this->table = otherTable.table;
+	this->tableLength = otherTable.tableLength;
+	this->name = otherTable.name;
+	this->password = otherTable.password;
+
+	otherTable.table = nullptr;
+	otherTable.tableLength = 0;
+
+	cout << "przenosze: " << this->name << endl;
+}
+
 Table::~Table() {
 	delete[] this->table;
 
@@ -173,11 +185,35 @@ void Table::setValueAt(int position, int newValue) {
 	this->table[position] = newValue;
 }
 
-Table Table::operator + (Table &newValue) {
-	int newLength = this->tableLength + newValue.tableLength;
+Table& Table::operator=(Table &&otherTable) {
+	if (this != &otherTable) {
+		delete[] this->table;
+
+		this->table = otherTable.table;
+		this->tableLength = otherTable.tableLength;
+		this->name = otherTable.name;
+		this->password = otherTable.password;
+
+		otherTable.table = nullptr;
+		otherTable.tableLength = 0;
+	}
+	return *this;
+}
+
+Table Table::operator + (const Table &otherTable) {
+	int newLength = this->tableLength + otherTable.tableLength;
 	Table newTable("default", newLength, "P@ssw0rd");
 	copy(this->table, this->table + this->tableLength, newTable.table);
-	copy(newValue.table, newValue.table + newValue.tableLength, newTable.table + this->tableLength);
+	copy(otherTable.table, otherTable.table + otherTable.tableLength, newTable.table + this->tableLength);
+
+	return newTable;
+}
+
+Table Table::operator+(const Table &&otherTable) {
+	int newLength = this->tableLength + otherTable.tableLength;
+	Table newTable("default", newLength, "P@ssw0rd");
+	copy(this->table, this->table + this->tableLength, newTable.table);
+	copy(otherTable.table, otherTable.table + otherTable.tableLength, newTable.table + this->tableLength);
 
 	return newTable;
 }
