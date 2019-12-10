@@ -3,14 +3,41 @@
 
 #include "pch.h"
 #include "table.h"
+#include "table2.h"
 
 #include <iostream>
+#include <ctime>
 
 using namespace std;
 
 int main() {
-	Table tab, tab2;
-	tab + tab2;
+	double czas;
+	clock_t start, koniec;
+
+	Table myTabs[8000];
+
+	Table2 myTabs2[8000];
+
+
+	start = clock();
+	for (int i = 1; i < 8000; i++) {
+		myTabs[i] + move(myTabs[i-1]);
+	}
+	
+	koniec = clock();
+	czas = (koniec - start) / (double)CLOCKS_PER_SEC;
+	cout << "Czas wykonania przenoszenie: " << czas << endl;
+
+	start = clock();
+	for (int i = 1; i < 8000; i++) {
+		myTabs2[i] + myTabs2[i-1];
+	}
+
+	koniec = clock();
+	czas = (koniec - start) / (double)CLOCKS_PER_SEC;
+	cout << "Czas wykonania kopiowanie: " << czas << endl;
+	Table tab3, tab4, tab5;
+	tab5 = tab3 + move(tab4);
 	//tab.showTable();
 
 	//Table tab2(tab);
@@ -23,6 +50,11 @@ int main() {
 
 	//tab3.showTable();
 	//tab.showTable();
+	//delete myTabs2;
+	//delete myTabs2ToCopy;
+	//delete myTabs;
+	//delete myTabsToCopy;
+	return 0;
 }
 
 // Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania

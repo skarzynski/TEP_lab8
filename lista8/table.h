@@ -42,7 +42,7 @@ public:
 
 	Table& operator = (Table &&otherTable); //przenoszący operator =
 	Table operator + (const Table &otherTable);	//operator + zwracający konkatenację dwóch tablic
-	Table operator + (const Table &&otherTable); //przenoszący operator + zwracający konkatenację dwóch tablic
+	Table operator + (Table &&otherTable); //przenoszący operator + zwracający konkatenację dwóch tablic
 	Table operator << (int position);	//operator << przesuwający tablicę o zadaną liczbę pozycji w lewo
 	Table operator >> (int position);	//operator >> przesuwający tablicę o zadaną liczbę pozycji w prawo
 

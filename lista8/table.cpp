@@ -14,17 +14,17 @@ Konstruktory i desktruktor
 
 Table::Table() {
 	this->name = "default_name";
-	this->tableLength = 10;
+	this->tableLength = 1;
 	this->password = "P@ssw0rd";
 
-	cout << "bezp: " << this->name << endl;
+	//cout << "bezp: " << this->name << endl;
 
 	this->table = new int[this->tableLength];
 	fillWithFives();
 }
 
 Table::Table(string name, int tableLength, string password) {
-	if (name == "" || tableLength < 1 || tableLength > 1000) {
+	if (name == "" || tableLength < 1 || tableLength > 100000) {
 		cout << BAD_PARAMS << endl;
 		return;
 	}
@@ -35,7 +35,7 @@ Table::Table(string name, int tableLength, string password) {
 	this->tableLength = tableLength;
 	this->password = password;
 
-	cout << "parametr: " << this->name << endl;
+	//cout << "parametr: " << this->name << endl;
 
 	this->table = new int[this->tableLength];
 	fillWithFives();
@@ -55,7 +55,7 @@ Table::Table(const Table &otherTable) {
 		this->table[i] = otherTable.table[i];
 	}
 
-	cout << "kopiuj: " << this->name << endl;
+	//cout << "kopiuj: " << this->name << endl;
 }
 
 Table::Table(Table && otherTable) {
@@ -67,13 +67,13 @@ Table::Table(Table && otherTable) {
 	otherTable.table = nullptr;
 	otherTable.tableLength = 0;
 
-	cout << "przenosze: " << this->name << endl;
+	//cout << "przenosze: " << this->name << endl;
 }
 
 Table::~Table() {
 	delete[] this->table;
 
-	cout << "usuwam: " << this->name << endl;
+	//cout << "usuwam: " << this->name << endl;
 }
 
 /*-----------------------------
@@ -116,7 +116,7 @@ int Table::getSize() {
 }
 
 bool Table::setNewSize(int newSize) {
-	if (newSize < 1 || newSize > 1000) {
+	if (newSize < 1 || newSize > 100000) {
 		cout << BAD_PARAMS << endl;
 		return false;
 	}
@@ -170,7 +170,7 @@ Table* Table::cloneTable() {
 }
 
 void Table::setSize(int newSize) {
-	if (newSize < 1 || newSize > 1000) {
+	if (newSize < 1 || newSize > 100000) {
 		cout << BAD_PARAMS << endl;
 		return;
 	}
@@ -200,7 +200,7 @@ Table& Table::operator=(Table &&otherTable) {
 	return *this;
 }
 
-Table Table::operator + (const Table &otherTable) {
+Table Table::operator+(const Table &otherTable) {
 	int newLength = this->tableLength + otherTable.tableLength;
 	Table newTable("default", newLength, "P@ssw0rd");
 	copy(this->table, this->table + this->tableLength, newTable.table);
@@ -209,7 +209,7 @@ Table Table::operator + (const Table &otherTable) {
 	return newTable;
 }
 
-Table Table::operator+(const Table &&otherTable) {
+Table Table::operator+(Table &&otherTable) {
 	int newLength = this->tableLength + otherTable.tableLength;
 	Table newTable("default", newLength, "P@ssw0rd");
 	copy(this->table, this->table + this->tableLength, newTable.table);
